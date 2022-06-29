@@ -42,42 +42,7 @@ resource Runbook_CollectAdvisorScore 'Microsoft.Automation/automationAccounts/ru
 }
 
 
-resource DailySchedule 'Microsoft.Automation/automationAccounts/schedules@2020-01-13-preview' = {
-  name: '${AutomationAccount.name}/CollectAdvisorScaore'
-  properties:{
-    description: 'Schedule daily'
-    startTime: ''
-    frequency: 'Day'
-    interval: 1
-  }
-}
 
-resource Variable_AzSqlPassword 'Microsoft.Automation/automationAccounts/variables@2020-01-13-preview' = {
-  name: '${AutomationAccount.name}/AzSqlPassword'
-  properties: {
-    isEncrypted: true
-    value: 'djföljsdhfkljsdh'
-  }
-}
 
-resource Variable_AzSqlLogin 'Microsoft.Automation/automationAccounts/variables@2020-01-13-preview' = {
-  name: '${AutomationAccount.name}/AzSqlLogin'
-  properties: {
-    isEncrypted: false
-    value: 'sqladmin'
-  }
-}
 
-param assignmentName string = guid(resourceGroup().id)
-resource SystemAssignedManagedIdentityRgContributor 'Microsoft.Authorization/roleAssignments@2020-03-01-preview' = {
-  name: assignmentName
-  properties: {
-    roleDefinitionId: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c'
-    principalId: AutomationAccount.identity.principalId
-  }
-  dependsOn:[
-    AutomationAccount
-    // Workaround because AutomationAccount.identity.principalId takes time to be available ...
-    // This workaround avoid the PrincipalNotFound error message
-  ]
-}
+
