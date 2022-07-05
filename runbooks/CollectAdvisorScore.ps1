@@ -64,7 +64,7 @@ foreach($SubId in $SubscriptionId.Id){
         # insert data to Azure SQL
         $Connection = New-Object System.Data.SQLClient.SQLConnection
         # $Connection.ConnectionString = "server='$serverName';database='$databaseName';"
-        $Connection.ConnectionString = "Server=tcp:sqlsrv20489.database.windows.net,1433;Initial Catalog=Database0001;Persist Security Info=False;User ID='$AzSqlLogin';Password='$AzSqlPassword';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+        $Connection.ConnectionString = "Server=tcp:servername.database.windows.net,1433;Initial Catalog=DB01;Persist Security Info=False;User ID='$AzSqlLogin';Password='$AzSqlPassword';MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
 
         $Connection.Open()
         $Command = New-Object System.Data.SQLClient.SQLCommand
